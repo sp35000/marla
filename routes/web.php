@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('advsrc', AdvSrcController::class);
+Route::resource('advtgt', AdvTgtController::class);
+Route::resource('advlnk', AdvLnkController::class);
