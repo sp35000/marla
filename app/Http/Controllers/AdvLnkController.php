@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AdvLnk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdvLnkController extends Controller
 {
@@ -14,7 +15,8 @@ class AdvLnkController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $advlnk = AdvLnk::orderBy('id','desc')->take(100)->get();
+        return view('AdvLnk.index',['advlnk' => $advlnk]);
     }
 
     /**
@@ -24,7 +26,7 @@ class AdvLnkController extends Controller
      */
     public function create()
     {
-        //
+        return view('AdvLnk.create');
     }
 
     /**
@@ -35,51 +37,78 @@ class AdvLnkController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        //dd($request->all());
+        AdvLnk::create([
+            'title' => $request->title,
+            'category' => $request->category,
+            'link' => $request->link,
+            'hashtag' => $request->hashtag,
+            'media' => $request->media]);
+            //return view('AdvLnk.show', ['advlnk' => $advlnk]);
+            $advlnk = AdvLnk::orderBy('id','desc')->take(100)->get();
+            return view('AdvLnk.index',['advlnk' => $advlnk]);
+
+        }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AdvLnk  $advLnk
+     * @param  \App\Models\AdvLnk  $advlnk
      * @return \Illuminate\Http\Response
      */
-    public function show(AdvLnk $advLnk)
+    public function show($id)
     {
-        //
+        //$advlnk = AdvLnk::findOrFail($id);
+        //return view('AdvLnk.show', ['advlnk' => $advlnk]);
+        $advlnk = AdvLnk::orderBy('id','desc')->take(100)->get();
+        return view('AdvLnk.index',['advlnk' => $advlnk]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\AdvLnk  $advLnk
+     * @param  \App\Models\AdvLnk  $advlnk
      * @return \Illuminate\Http\Response
      */
-    public function edit(AdvLnk $advLnk)
+    public function edit($id)
     {
-        //
+        $advlnk = AdvLnk::findOrFail($id);
+        return view('AdvLnk.edit', ['advlnk' => $advlnk]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\AdvLnk  $advLnk
+     * @param  \App\Models\AdvLnk  $advlnk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AdvLnk $advLnk)
+    public function update(Request $request)
     {
-        //
-    }
+        $advlnk = AdvLnk::findOrFail($request->id);
+        $advlnk->update([
+            'title' => $request->title,
+            'category' => $request->category,
+            'link' => $request->link,
+            'hashtag' => $request->hashtag,
+            'media' => $request->media]);
+            //return view('AdvLnk.show', ['advlnk' => $advlnk]);
+            $advlnk = AdvLnk::orderBy('id','desc')->take(100)->get();
+            return view('AdvLnk.index',['advlnk' => $advlnk]);
+        }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\AdvLnk  $advLnk
+     * @param  \App\Models\AdvLnk  $advlnk
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AdvLnk $advLnk)
+    public function destroy(Request $request)
     {
-        //
+        //dd($request->all());
+        $advlnk = AdvLnk::findOrFail($request->id);
+        $advlnk->delete();
+        $advlnk = AdvLnk::orderBy('id','desc')->take(100)->get();
+        return view('AdvLnk.index',['advlnk' => $advlnk]);
     }
 }

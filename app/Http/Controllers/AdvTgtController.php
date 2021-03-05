@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AdvTgt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdvTgtController extends Controller
 {
@@ -14,7 +15,8 @@ class AdvTgtController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $advtgt = AdvTgt::orderBy('id','desc')->take(100)->get();
+        return view('AdvTgt.index',['advtgt' => $advtgt]);
     }
 
     /**
@@ -24,7 +26,7 @@ class AdvTgtController extends Controller
      */
     public function create()
     {
-        //
+        return view('AdvTgt.create');
     }
 
     /**
@@ -35,51 +37,78 @@ class AdvTgtController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        //dd($request->all());
+        AdvTgt::create([
+            'title' => $request->title,
+            'category' => $request->category,
+            'link' => $request->link,
+            'hashtag' => $request->hashtag,
+            'media' => $request->media]);
+            //return view('AdvTgt.show', ['advtgt' => $advtgt]);
+            $advtgt = AdvTgt::orderBy('id','desc')->take(100)->get();
+            return view('AdvTgt.index',['advtgt' => $advtgt]);
+
+        }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AdvTgt  $advTgt
+     * @param  \App\Models\AdvTgt  $advtgt
      * @return \Illuminate\Http\Response
      */
-    public function show(AdvTgt $advTgt)
+    public function show($id)
     {
-        //
+        //$advtgt = AdvTgt::findOrFail($id);
+        //return view('AdvTgt.show', ['advtgt' => $advtgt]);
+        $advtgt = AdvTgt::orderBy('id','desc')->take(100)->get();
+        return view('AdvTgt.index',['advtgt' => $advtgt]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\AdvTgt  $advTgt
+     * @param  \App\Models\AdvTgt  $advtgt
      * @return \Illuminate\Http\Response
      */
-    public function edit(AdvTgt $advTgt)
+    public function edit($id)
     {
-        //
+        $advtgt = AdvTgt::findOrFail($id);
+        return view('AdvTgt.edit', ['advtgt' => $advtgt]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\AdvTgt  $advTgt
+     * @param  \App\Models\AdvTgt  $advtgt
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AdvTgt $advTgt)
+    public function update(Request $request)
     {
-        //
-    }
+        $advtgt = AdvTgt::findOrFail($request->id);
+        $advtgt->update([
+            'title' => $request->title,
+            'category' => $request->category,
+            'link' => $request->link,
+            'hashtag' => $request->hashtag,
+            'media' => $request->media]);
+            //return view('AdvTgt.show', ['advtgt' => $advtgt]);
+            $advtgt = AdvTgt::orderBy('id','desc')->take(100)->get();
+            return view('AdvTgt.index',['advtgt' => $advtgt]);
+        }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\AdvTgt  $advTgt
+     * @param  \App\Models\AdvTgt  $advtgt
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AdvTgt $advTgt)
+    public function destroy(Request $request)
     {
-        //
+        //dd($request->all());
+        $advtgt = AdvTgt::findOrFail($request->id);
+        $advtgt->delete();
+        $advtgt = AdvTgt::orderBy('id','desc')->take(100)->get();
+        return view('AdvTgt.index',['advtgt' => $advtgt]);
     }
 }

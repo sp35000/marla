@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AdvSrc;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdvSrcController extends Controller
 {
@@ -14,7 +15,8 @@ class AdvSrcController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $advsrc = AdvSrc::orderBy('id','desc')->take(100)->get();
+        return view('AdvSrc.index',['advsrc' => $advsrc]);
     }
 
     /**
@@ -24,7 +26,7 @@ class AdvSrcController extends Controller
      */
     public function create()
     {
-        //
+        return view('AdvSrc.create');
     }
 
     /**
@@ -35,51 +37,78 @@ class AdvSrcController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        //dd($request->all());
+        AdvSrc::create([
+            'title' => $request->title,
+            'category' => $request->category,
+            'link' => $request->link,
+            'hashtag' => $request->hashtag,
+            'media' => $request->media]);
+            //return view('AdvSrc.show', ['advsrc' => $advsrc]);
+            $advsrc = AdvSrc::orderBy('id','desc')->take(100)->get();
+            return view('AdvSrc.index',['advsrc' => $advsrc]);
+
+        }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AdvSrc  $advSrc
+     * @param  \App\Models\AdvSrc  $advsrc
      * @return \Illuminate\Http\Response
      */
-    public function show(AdvSrc $advSrc)
+    public function show($id)
     {
-        //
+        //$advsrc = AdvSrc::findOrFail($id);
+        //return view('AdvSrc.show', ['advsrc' => $advsrc]);
+        $advsrc = AdvSrc::orderBy('id','desc')->take(100)->get();
+        return view('AdvSrc.index',['advsrc' => $advsrc]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\AdvSrc  $advSrc
+     * @param  \App\Models\AdvSrc  $advsrc
      * @return \Illuminate\Http\Response
      */
-    public function edit(AdvSrc $advSrc)
+    public function edit($id)
     {
-        //
+        $advsrc = AdvSrc::findOrFail($id);
+        return view('AdvSrc.edit', ['advsrc' => $advsrc]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\AdvSrc  $advSrc
+     * @param  \App\Models\AdvSrc  $advsrc
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AdvSrc $advSrc)
+    public function update(Request $request)
     {
-        //
-    }
+        $advsrc = AdvSrc::findOrFail($request->id);
+        $advsrc->update([
+            'title' => $request->title,
+            'category' => $request->category,
+            'link' => $request->link,
+            'hashtag' => $request->hashtag,
+            'media' => $request->media]);
+            //return view('AdvSrc.show', ['advsrc' => $advsrc]);
+            $advsrc = AdvSrc::orderBy('id','desc')->take(100)->get();
+            return view('AdvSrc.index',['advsrc' => $advsrc]);
+        }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\AdvSrc  $advSrc
+     * @param  \App\Models\AdvSrc  $advsrc
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AdvSrc $advSrc)
+    public function destroy(Request $request)
     {
-        //
+        //dd($request->all());
+        $advsrc = AdvSrc::findOrFail($request->id);
+        $advsrc->delete();
+        $advsrc = AdvSrc::orderBy('id','desc')->take(100)->get();
+        return view('AdvSrc.index',['advsrc' => $advsrc]);
     }
 }
