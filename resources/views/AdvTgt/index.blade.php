@@ -5,10 +5,10 @@
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
             <br/><br/>
-                <h2>Serina CRUD</h2>
+                <h2>Marla CRUD</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="/news/create" title="Add News"> <i class="fas fa-plus-circle"></i>
+                <a class="btn btn-success" href="/advtgt/create" title="Add Target"> <i class="fas fa-plus-circle"></i>
                     </a>
             </div>
         </div>
@@ -24,23 +24,20 @@
         <tr>
             <th>operation</th>
             <th>id</th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Link</th>
-            <th>Hashtag</th>
-            <th>Media</th>
+            <th>URL</th>
+            <th>Texto</th>
         </tr>
-        @foreach ($news as $n) 
+        @foreach ($advtgt as $n)
             <tr>
             <td>
-                    <form action="/news/delete" method="POST">
+                    <form action="/advtgt/delete" method="POST">
                     <input type = "hidden" name="id" value="{{ $n->id }}">
 <!--
                         <a href="show/{{ $n->id }}" " title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a>
 -->
-                        <a href="/news/edit/{{ $n->id }}" title="edit">
+                        <a href="/advtgt/edit/{{ $n->id }}" title="edit">
                             <i class="fas fa-edit  fa-lg"></i>
                         </a>
                         @csrf
@@ -50,11 +47,8 @@
                     </form>
                 </td>
             <td>{{ $n->id }} </td>
-            <td>{{ $n->title }} </td>
-            <td>{{ $n->category }} </td>
-            <td>{{ $n->link }} </td>
-            <td>{{ $n->hashtag }} </td>
-            <td>{{ $n->media }} </td>
+            <td>{{ $n->url }} </td>
+            <td>{{ $n->advtext }} </td>
             </tr>
         @endforeach
     </table>

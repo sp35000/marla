@@ -15,7 +15,7 @@ class AdvSrcController extends Controller
      */
     public function index()
     {
-        $advsrc = AdvSrc::orderBy('id','desc')->take(100)->get();
+        $advsrc = AdvSrc::orderBy('id')->take(100)->get();
         return view('AdvSrc.index',['advsrc' => $advsrc]);
     }
 
@@ -38,16 +38,10 @@ class AdvSrcController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        AdvSrc::create([
-            'title' => $request->title,
-            'category' => $request->category,
-            'link' => $request->link,
-            'hashtag' => $request->hashtag,
-            'media' => $request->media]);
+        AdvSrc::create(['name' => $request->name]);
             //return view('AdvSrc.show', ['advsrc' => $advsrc]);
-            $advsrc = AdvSrc::orderBy('id','desc')->take(100)->get();
+            $advsrc = AdvSrc::orderBy('id')->take(100)->get();
             return view('AdvSrc.index',['advsrc' => $advsrc]);
-
         }
 
     /**
@@ -60,7 +54,7 @@ class AdvSrcController extends Controller
     {
         //$advsrc = AdvSrc::findOrFail($id);
         //return view('AdvSrc.show', ['advsrc' => $advsrc]);
-        $advsrc = AdvSrc::orderBy('id','desc')->take(100)->get();
+        $advsrc = AdvSrc::orderBy('id')->take(100)->get();
         return view('AdvSrc.index',['advsrc' => $advsrc]);
     }
 
@@ -86,14 +80,9 @@ class AdvSrcController extends Controller
     public function update(Request $request)
     {
         $advsrc = AdvSrc::findOrFail($request->id);
-        $advsrc->update([
-            'title' => $request->title,
-            'category' => $request->category,
-            'link' => $request->link,
-            'hashtag' => $request->hashtag,
-            'media' => $request->media]);
+        $advsrc->update(['name' => $request->name]);
             //return view('AdvSrc.show', ['advsrc' => $advsrc]);
-            $advsrc = AdvSrc::orderBy('id','desc')->take(100)->get();
+            $advsrc = AdvSrc::orderBy('id')->take(100)->get();
             return view('AdvSrc.index',['advsrc' => $advsrc]);
         }
 
@@ -108,7 +97,7 @@ class AdvSrcController extends Controller
         //dd($request->all());
         $advsrc = AdvSrc::findOrFail($request->id);
         $advsrc->delete();
-        $advsrc = AdvSrc::orderBy('id','desc')->take(100)->get();
+        $advsrc = AdvSrc::orderBy('id')->take(100)->get();
         return view('AdvSrc.index',['advsrc' => $advsrc]);
     }
 }

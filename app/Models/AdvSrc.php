@@ -10,7 +10,5 @@ class AdvSrc extends Model
     use HasFactory;
     protected $table = 'advsrc';
     public $timestamps = true;
-    protected $fillable = [
-    'name'
-];
+    protected $fillable = ['name'];
 }

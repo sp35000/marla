@@ -15,7 +15,7 @@ class AdvTgtController extends Controller
      */
     public function index()
     {
-        $advtgt = AdvTgt::orderBy('id','desc')->take(100)->get();
+        $advtgt = AdvTgt::orderBy('id')->take(100)->get();
         return view('AdvTgt.index',['advtgt' => $advtgt]);
     }
 
@@ -39,15 +39,12 @@ class AdvTgtController extends Controller
     {
         //dd($request->all());
         AdvTgt::create([
-            'title' => $request->title,
-            'category' => $request->category,
-            'link' => $request->link,
-            'hashtag' => $request->hashtag,
-            'media' => $request->media]);
+          'url' => $request->url,
+          'advtext' => $request->advtext
+        ]);
             //return view('AdvTgt.show', ['advtgt' => $advtgt]);
-            $advtgt = AdvTgt::orderBy('id','desc')->take(100)->get();
+            $advtgt = AdvTgt::orderBy('id')->take(100)->get();
             return view('AdvTgt.index',['advtgt' => $advtgt]);
-
         }
 
     /**
@@ -60,7 +57,7 @@ class AdvTgtController extends Controller
     {
         //$advtgt = AdvTgt::findOrFail($id);
         //return view('AdvTgt.show', ['advtgt' => $advtgt]);
-        $advtgt = AdvTgt::orderBy('id','desc')->take(100)->get();
+        $advtgt = AdvTgt::orderBy('id')->take(100)->get();
         return view('AdvTgt.index',['advtgt' => $advtgt]);
     }
 
@@ -87,13 +84,11 @@ class AdvTgtController extends Controller
     {
         $advtgt = AdvTgt::findOrFail($request->id);
         $advtgt->update([
-            'title' => $request->title,
-            'category' => $request->category,
-            'link' => $request->link,
-            'hashtag' => $request->hashtag,
-            'media' => $request->media]);
+          'url' => $request->url,
+          'advtext' => $request->advtext
+        ]);
             //return view('AdvTgt.show', ['advtgt' => $advtgt]);
-            $advtgt = AdvTgt::orderBy('id','desc')->take(100)->get();
+            $advtgt = AdvTgt::orderBy('id')->take(100)->get();
             return view('AdvTgt.index',['advtgt' => $advtgt]);
         }
 
@@ -108,7 +103,7 @@ class AdvTgtController extends Controller
         //dd($request->all());
         $advtgt = AdvTgt::findOrFail($request->id);
         $advtgt->delete();
-        $advtgt = AdvTgt::orderBy('id','desc')->take(100)->get();
+        $advtgt = AdvTgt::orderBy('id')->take(100)->get();
         return view('AdvTgt.index',['advtgt' => $advtgt]);
     }
 }
