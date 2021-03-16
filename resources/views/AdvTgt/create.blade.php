@@ -8,7 +8,7 @@
                 <h2>Marla Add News</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="/advsrc/" title="Go back"> <i class="fas fa-backward "></i> </a>
+                <a class="btn btn-primary" href="/advtgt/" title="Go back"> <i class="fas fa-backward "></i> </a>
             </div>
         </div>
     </div>

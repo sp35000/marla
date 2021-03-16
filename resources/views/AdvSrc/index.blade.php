@@ -5,7 +5,13 @@
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
             <br/><br/>
-                <h2>Marla CRUD</h2>
+            <h2>Marla Source CRUD</h2>
+            <p>
+              <a href="/">Home</a>|
+              <a href="/advsrc/">Source</a>|
+              <a href="/advlnk/">Link</a>|
+              <a href="/advtgt/">Target</a>
+            </p>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="/advsrc/create" title="Add Source"> <i class="fas fa-plus-circle"></i>

@@ -5,10 +5,10 @@
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
             <br/><br/>
-                <h2>Marla Add News</h2>
+                <h2>Marla Add Link</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="/advsrc/" title="Go back"> <i class="fas fa-backward "></i> </a>
+                <a class="btn btn-primary" href="/advlnk/" title="Go back"> <i class="fas fa-backward "></i> </a>
             </div>
         </div>
     </div>
@@ -27,12 +27,18 @@
         @csrf
 
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="title">
-                </div>
-            </div>
+          <div class="col-xs-12 col-sm-12 col-md-12">
+              <div class="form-group">
+                  <strong>Origin:</strong>
+                  <input type="text" name="origin_fk" class="form-control" placeholder="origin_fk">
+              </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12">
+              <div class="form-group">
+                  <strong>Target:</strong>
+                  <input type="text" name="target_fk" class="form-control" placeholder="target_fk">
+              </div>
+          </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

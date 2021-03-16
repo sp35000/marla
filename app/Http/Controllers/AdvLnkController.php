@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdvSrc;
+use App\Models\AdvLnk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AdvSrcController extends Controller
+class AdvLnkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AdvSrcController extends Controller
      */
     public function index()
     {
-        $advsrc = AdvSrc::orderBy('id')->take(100)->get();
-        return view('AdvSrc.index',['advsrc' => $advsrc]);
+        $advlnk = AdvLnk::orderBy('id')->take(100)->get();
+        return view('AdvLnk.index',['advlnk' => $advlnk]);
     }
 
     /**
@@ -26,7 +26,7 @@ class AdvSrcController extends Controller
      */
     public function create()
     {
-        return view('AdvSrc.create');
+        return view('AdvLnk.create');
     }
 
     /**
@@ -38,66 +38,72 @@ class AdvSrcController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        AdvSrc::create(['name' => $request->name]);
-            //return view('AdvSrc.show', ['advsrc' => $advsrc]);
-            $advsrc = AdvSrc::orderBy('id')->take(100)->get();
-            return view('AdvSrc.index',['advsrc' => $advsrc]);
+        AdvLnk::create([
+          'origin_fk' => $request->origin_fk,
+          'target_fk' => $request->target_fk
+        ]);
+            //return view('AdvLnk.show', ['advlnk' => $advlnk]);
+            $advlnk = AdvLnk::orderBy('id')->take(100)->get();
+            return view('AdvLnk.index',['advlnk' => $advlnk]);
         }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AdvSrc  $advsrc
+     * @param  \App\Models\AdvLnk  $advlnk
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //$advsrc = AdvSrc::findOrFail($id);
-        //return view('AdvSrc.show', ['advsrc' => $advsrc]);
-        $advsrc = AdvSrc::orderBy('id')->take(100)->get();
-        return view('AdvSrc.index',['advsrc' => $advsrc]);
+        //$advlnk = AdvLnk::findOrFail($id);
+        //return view('AdvLnk.show', ['advlnk' => $advlnk]);
+        $advlnk = AdvLnk::orderBy('id')->take(100)->get();
+        return view('AdvLnk.index',['advlnk' => $advlnk]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\AdvSrc  $advsrc
+     * @param  \App\Models\AdvLnk  $advlnk
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $advsrc = AdvSrc::findOrFail($id);
-        return view('AdvSrc.edit', ['advsrc' => $advsrc]);
+        $advlnk = AdvLnk::findOrFail($id);
+        return view('AdvLnk.edit', ['advlnk' => $advlnk]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\AdvSrc  $advsrc
+     * @param  \App\Models\AdvLnk  $advlnk
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-        $advsrc = AdvSrc::findOrFail($request->id);
-        $advsrc->update(['name' => $request->name]);
-            //return view('AdvSrc.show', ['advsrc' => $advsrc]);
-            $advsrc = AdvSrc::orderBy('id')->take(100)->get();
-            return view('AdvSrc.index',['advsrc' => $advsrc]);
+        $advlnk = AdvLnk::findOrFail($request->id);
+        $advlnk->update([
+          'origin_fk' => $request->origin_fk,
+          'target_fk' => $request->target_fk
+        ]);
+            //return view('AdvLnk.show', ['advlnk' => $advlnk]);
+            $advlnk = AdvLnk::orderBy('id')->take(100)->get();
+            return view('AdvLnk.index',['advlnk' => $advlnk]);
         }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\AdvSrc  $advsrc
+     * @param  \App\Models\AdvLnk  $advlnk
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
         //dd($request->all());
-        $advsrc = AdvSrc::findOrFail($request->id);
-        $advsrc->delete();
-        $advsrc = AdvSrc::orderBy('id')->take(100)->get();
-        return view('AdvSrc.index',['advsrc' => $advsrc]);
+        $advlnk = AdvLnk::findOrFail($request->id);
+        $advlnk->delete();
+        $advlnk = AdvLnk::orderBy('id')->take(100)->get();
+        return view('AdvLnk.index',['advlnk' => $advlnk]);
     }
 }
