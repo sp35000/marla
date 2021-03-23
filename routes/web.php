@@ -27,6 +27,7 @@ Route::get('advsrc/edit/{id}','App\Http\Controllers\AdvSrcController@edit');
 Route::post('advsrc/edit/{id}','App\Http\Controllers\AdvSrcController@update');
 Route::post('advsrc/delete','App\Http\Controllers\AdvSrcController@destroy');
 
+Route::get('advlnk/{id}','App\Http\Controllers\AdvLnkController@showTarget');
 Route::get('advlnk/','App\Http\Controllers\AdvLnkController@index');
 Route::get('advlnk/create','App\Http\Controllers\AdvLnkController@create');
 Route::post('advlnk/create','App\Http\Controllers\AdvLnkController@store');

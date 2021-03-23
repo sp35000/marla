@@ -2,12 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdvSrc;
 use App\Models\AdvLnk;
+use App\Models\AdvTgt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AdvLnkController extends Controller
 {
+    /**
+     * Return the target for specified source.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function showTarget(Request $request)
+    {
+      $advlnk = AdvLnk::select('*')
+                ->where('origin_fk','=',$request->id)
+                ->get();
+      $advtgt = AdvTgt::select('advtext','url')
+                ->where('id','=',$advlnk->random()->target_fk)
+                ->get();
+      return $advtgt;
+    }
+
     /**
      * Display a listing of the resource.
      *
